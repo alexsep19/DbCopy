@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>DbCopyParent</artifactId>
+        <groupId>ru.shu</groupId>
+        <version>0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ear-rest</artifactId>
+    <packaging>ear</packaging>
+    <name>Rest Application Module</name>
+
+    <properties>
+        <fileName>dbcopy</fileName>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.shu</groupId>
+            <artifactId>DbCopy-war</artifactId>
+            <version>0.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>ru.shu</groupId>
+            <artifactId>DbCopy-common</artifactId>
+            <version>0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>ru.shu</groupId>
+            <artifactId>DbCopy-jpa</artifactId>
+            <version>0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.10.1</version>
+                <configuration>
+                    <!--<earName>dbcopy-${project.version}</earName>-->
+                    <earName>${fileName}</earName>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <archive>
+                        <manifestEntries />
+                    </archive>
+                    <packagingExcludes />
+                    <modules>
+                        <jarModule>
+                            <groupId>ru.shu</groupId>
+                            <artifactId>DbCopy-common</artifactId>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>ru.shu</groupId>
+                            <artifactId>DbCopy-jpa</artifactId>
+                        </jarModule>
+                        <webModule>
+                            <groupId>ru.shu</groupId>
+                            <artifactId>DbCopy-war</artifactId>
+                            <contextRoot>/</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+            <!--изменение persistence.xml-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-resource-one</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/META-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>c:/ideapr/DbCopy/DbCopy-jpa/src/main/java/META-INF</directory>
+                                    <includes>
+                                        <include>persistence.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+ <!--           <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>c:/ideapr/DbCopy/DbCopy-jpa/src/main/java/META-INF/persistence.xml</file>
+                    <outputFile>${project.build.directory}/${project.artifactId}-${project.version}/META-INF/persistence.xml</outputFile>
+                    <replacements>
+                        <replacement>
+                            <token>#dataSource#</token>
+                            <value>${data.source}</value>
+                        </replacement>
+                        <replacement>
+                            <token>#hbm2ddl_type#</token>
+                            <value>update</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${deploy.path}</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}</directory>
+                                    <includes>
+                                        <include>${fileName}.${project.packaging}</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
