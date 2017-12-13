@@ -9,16 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>DbCopy-jpa</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>DbCopy-ejb</artifactId>
+    <packaging>ejb</packaging>
 
-<!--    <dependencies>
+    <dependencies>
         <dependency>
             <groupId>ru.shu</groupId>
-            <artifactId>DbCopy-ejb</artifactId>
+            <artifactId>DbCopy-jpa</artifactId>
             <version>0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    -->
 </project>

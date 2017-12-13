@@ -1,5 +1,8 @@
 package rolo;
 
+import api.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -19,7 +22,7 @@ import java.util.List;
 @Entity
 @Table(name="roles", schema = "ROLO")
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable {
+public class Role extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -30,15 +33,9 @@ public class Role implements Serializable {
 
 	//bi-directional many-to-one association to Urro
 	@OneToMany(mappedBy="role", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@JsonBackReference
 	private List<Urro> urros;
 
-	//------- mine -----------
-	public Integer getVersion() {
-		return 1;
-	}
-	public String toString(){
-        return id==null?"0":String.valueOf(id);
-	}
 	public Role() {
 	}
 

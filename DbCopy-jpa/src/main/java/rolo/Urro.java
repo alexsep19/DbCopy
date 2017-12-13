@@ -3,6 +3,7 @@ package rolo;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * The persistent class for the urro database table.
@@ -16,18 +17,14 @@ public class Urro implements Serializable {
 
 	@EmbeddedId
 	private UrroId id;
+
 	@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	private Role role;
+
 	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "USER_ID", referencedColumnName = "ID", insertable = false, updatable = false)
 	private User user;
-	//------- mine -----------
-	public Integer getVersion() {
-		return 1;
-	}
-	public String toString(){
-        return id==null?"0":String.valueOf(id);
-	}
-    //--------------------------
 
 	public Urro() {
 	}

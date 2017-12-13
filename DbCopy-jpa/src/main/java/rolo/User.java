@@ -1,7 +1,10 @@
 package rolo;
 
-import java.io.Serializable;
 import javax.persistence.*;
+
+import api.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.jboss.resteasy.util.Base64;
 import java.security.MessageDigest;
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="users", schema = "ROLO")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
+public class User extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,18 +26,10 @@ public class User implements Serializable {
 	private String mail;
 	private String name;
 	private String pass;
-	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
-	private List<Urro> urros;
-	@OneToMany(mappedBy="user")
 
-	//------- mine -----------
-	public Integer getVersion() {
-		return 1;
-	}
-	public String toString(){
-        return id==null?"0":String.valueOf(id);
-	}
-    //--------------------------
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@JsonBackReference
+	private List<Urro> urros;
 
 	public User() {
 	}

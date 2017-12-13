@@ -22,7 +22,7 @@
             <groupId>ru.shu</groupId>
             <artifactId>DbCopy-war</artifactId>
             <version>0.0-SNAPSHOT</version>
-            <type>war</type>
+           <type>war</type>
         </dependency>
         <dependency>
             <groupId>ru.shu</groupId>
@@ -36,7 +36,12 @@
             <version>0.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-
+        <dependency>
+            <groupId>ru.shu</groupId>
+            <artifactId>DbCopy-ejb</artifactId>
+            <version>0.0-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -62,6 +67,10 @@
                             <groupId>ru.shu</groupId>
                             <artifactId>DbCopy-jpa</artifactId>
                         </jarModule>
+                        <ejbModule>
+                            <groupId>ru.shu</groupId>
+                            <artifactId>DbCopy-ejb</artifactId>
+                        </ejbModule>
                         <webModule>
                             <groupId>ru.shu</groupId>
                             <artifactId>DbCopy-war</artifactId>
@@ -71,13 +80,13 @@
                 </configuration>
             </plugin>
             <!--изменение persistence.xml-->
-            <plugin>
+<!--            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.7</version>
                 <executions>
                     <execution>
                         <id>copy-resource-one</id>
-                        <phase>validate</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -94,33 +103,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
- <!--           <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.2</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <file>c:/ideapr/DbCopy/DbCopy-jpa/src/main/java/META-INF/persistence.xml</file>
-                    <outputFile>${project.build.directory}/${project.artifactId}-${project.version}/META-INF/persistence.xml</outputFile>
-                    <replacements>
-                        <replacement>
-                            <token>#dataSource#</token>
-                            <value>${data.source}</value>
-                        </replacement>
-                        <replacement>
-                            <token>#hbm2ddl_type#</token>
-                            <value>update</value>
-                        </replacement>
-                    </replacements>
-                </configuration>
             </plugin>
 -->
             <plugin>
