@@ -1,5 +1,9 @@
 package rolo;
 
+import api.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -12,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(schema = "ROLO")
 @NamedQuery(name="Urro.findAll", query="SELECT u FROM Urro u")
-public class Urro implements Serializable {
+public class Urro extends AbstractEntity<UrroId> {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -20,11 +24,13 @@ public class Urro implements Serializable {
 
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-	private Role role;
+    @JsonBackReference
+    private Role role;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "USER_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-	private User user;
+    @JsonBackReference
+    private User user;
 
 	public Urro() {
 	}
