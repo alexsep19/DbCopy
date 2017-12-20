@@ -34,9 +34,6 @@ public class User extends AbstractEntity<Long> {
 	public User() {
 	}
 
-    public String getStrId() {
-		return String.valueOf(this.id);
-	}
 	public Long getId() {
 		return this.id;
 	}

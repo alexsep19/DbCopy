@@ -13,7 +13,7 @@ import static rest.api.IRestApiMediaType.JSON_UTF8;
 import static rest.api.IRestApiMediaType.TEXT_UTF8;
 
 @Path("/user")
-@Consumes(JSON_UTF8)
+//@Consumes(JSON_UTF8)
 @Produces(JSON_UTF8)
 @Stateless
 public class UserRest extends AbstractEntityRest<Long, User, UserDao> {
@@ -25,15 +25,21 @@ public class UserRest extends AbstractEntityRest<Long, User, UserDao> {
     @GET
     @Path("/echo")
     @Produces(TEXT_UTF8)
-    public String echo(){ return super.echo(); }
+    public String echo(){ return echo(); }
 
     @GET
-    public List<User> list(@QueryParam("offset") Integer offset,
+    public List<User> getList(@QueryParam("offset") Integer offset,
                        @QueryParam("length") Integer length){
-        return super.list(offset,length);
+        return list(offset,length);
     }
     @POST
+    public List<User> postList(@QueryParam("offset") Integer offset,
+                           @QueryParam("length") Integer length){
+        return list(offset,length);
+    }
+
+    @POST
     public void create(User user){
-        super.create(user);
+        create(user);
     }
 }

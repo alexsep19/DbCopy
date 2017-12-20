@@ -4,6 +4,9 @@
     <artifactId>DbCopyParent</artifactId>
     <packaging>pom</packaging>
     <version>0.0-SNAPSHOT</version>
+    <modules>
+        <module>rest-client</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -112,6 +115,19 @@
     </dependencies>
 
     <profiles>
+        <profile>
+            <id>rest-client</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-jaxrs</artifactId>
+                    <version>2.3.2.Final</version>
+                </dependency>
+            </dependencies>
+            <modules>
+                <module>rest-client</module>
+            </modules>
+        </profile>
         <profile>
             <id>jpa-test</id>
                 <dependencies>

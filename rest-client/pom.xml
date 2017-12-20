@@ -9,7 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>DbCopy-jpa</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>rest-client</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.shu</groupId>
+            <artifactId>DbCopy-jpa</artifactId>
+            <version>0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
