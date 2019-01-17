@@ -4,9 +4,11 @@
     <artifactId>DbCopyParent</artifactId>
     <packaging>pom</packaging>
     <version>0.0-SNAPSHOT</version>
-    <modules>
-        <module>rest-client</module>
-    </modules>
+    <!--<modules>-->
+        <!--<module>rest-client</module>-->
+        <!--<module>DbCopy-ejb-soap</module>-->
+        <!--<module>ear-soap</module>-->
+    <!--</modules>-->
 
     <properties>
         <java.version>1.8</java.version>
@@ -150,14 +152,27 @@
         <profile>
             <id>total-rest</id>
             <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>DbCopy-war</module>
+                <module>DbCopy-common</module>
+                <module>DbCopy-jpa</module>
+                <module>DbCopy-ejb-rest</module>
+                <module>ear-rest</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>total-soap</id>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
                 <module>DbCopy-war</module>
                 <module>DbCopy-common</module>
                 <module>DbCopy-jpa</module>
-                <module>DbCopy-ejb</module>
-                <module>ear-rest</module>
+                <module>DbCopy-ejb-soap</module>
+                <module>ear-soap</module>
             </modules>
         </profile>
     </profiles>

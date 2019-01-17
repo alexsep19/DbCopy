@@ -9,20 +9,31 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ear-rest</artifactId>
-    <packaging>ear</packaging>
-    <name>Rest Application Module</name>
+    <artifactId>ear-soap</artifactId>
 
     <properties>
         <fileName>dbcopy</fileName>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/soap/soap -->
+        <dependency>
+            <groupId>soap</groupId>
+            <artifactId>soap</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.sun.xml.ws</groupId>-->
+            <!--<artifactId>jaxws-rt</artifactId>-->
+            <!--<version>2.1.3</version>-->
+            <!--<scope>compile</scope>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>ru.shu</groupId>
             <artifactId>DbCopy-war</artifactId>
             <version>0.0-SNAPSHOT</version>
-           <type>war</type>
+            <type>war</type>
         </dependency>
         <dependency>
             <groupId>ru.shu</groupId>
@@ -38,7 +49,7 @@
         </dependency>
         <dependency>
             <groupId>ru.shu</groupId>
-            <artifactId>DbCopy-ejb-rest</artifactId>
+            <artifactId>DbCopy-ejb-soap</artifactId>
             <version>0.0-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
@@ -69,7 +80,7 @@
                         </jarModule>
                         <ejbModule>
                             <groupId>ru.shu</groupId>
-                            <artifactId>DbCopy-ejb-rest</artifactId>
+                            <artifactId>DbCopy-ejb-soap</artifactId>
                         </ejbModule>
                         <webModule>
                             <groupId>ru.shu</groupId>
@@ -80,31 +91,31 @@
                 </configuration>
             </plugin>
             <!--изменение persistence.xml-->
-<!--            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <id>copy-resource-one</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/META-INF</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>c:/ideapr/DbCopy/DbCopy-jpa/src/main/java/META-INF</directory>
-                                    <includes>
-                                        <include>persistence.xml</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
--->
+            <!--            <plugin>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <version>2.7</version>
+                            <executions>
+                                <execution>
+                                    <id>copy-resource-one</id>
+                                    <phase>install</phase>
+                                    <goals>
+                                        <goal>copy-resources</goal>
+                                    </goals>
+                                    <configuration>
+                                        <outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/META-INF</outputDirectory>
+                                        <resources>
+                                            <resource>
+                                                <directory>c:/ideapr/DbCopy/DbCopy-jpa/src/main/java/META-INF</directory>
+                                                <includes>
+                                                    <include>persistence.xml</include>
+                                                </includes>
+                                            </resource>
+                                        </resources>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
